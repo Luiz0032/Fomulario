@@ -11,6 +11,7 @@ model customer{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   email String
+  fone String
   status Boolean
   creat_at DateTime? @default(now())
   updated_at DateTime? @default(now())

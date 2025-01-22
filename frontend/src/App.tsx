@@ -6,6 +6,7 @@ interface CustomersProps {
   id:string
   name: string
   email: string
+  fone: string
   status: boolean
   created_at: string
 }
@@ -14,6 +15,7 @@ export default function App() {
   const [customers, setCustumers] = useState<CustomersProps[]>([])
   const nameRef = useRef<HTMLInputElement | null>(null)
   const emailRef = useRef<HTMLInputElement | null>(null)
+  const foneRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     loadCustomers();
@@ -28,17 +30,19 @@ export default function App() {
 async function hendleSubmit(event: FormEvent){
   event.preventDefault();
 
-  if(!nameRef.current?.value || !emailRef.current?.value) return;
+  if(!nameRef.current?.value || !emailRef.current?.value || !foneRef.current?.value) return;
 
     const response = await api.post("/customer", {
       name: nameRef.current?.value,
-      email: emailRef.current?.value
+      email: emailRef.current?.value,
+      fone: foneRef.current?.value
     })
 
     setCustumers(allCustomers => [...allCustomers, response.data])
 
     nameRef.current.value = ""
     emailRef.current.value = ""
+    foneRef.current.value = ""
 
 }
 
@@ -70,10 +74,16 @@ async function hendleDelet(id:string) {
           ref={nameRef}
           />
 
-<label className="font-medium text-white">E-mail:</label>
+          <label className="font-medium text-white">E-mail:</label>
           <input type="text" placeholder="Digite seu E-mail completo..."
           className="w-full mb-5 p-2 rounded"
           ref={emailRef}
+          />
+
+<label className="font-medium text-white">Telefone:</label>
+          <input type="text" placeholder="Digite seu telefone completo..."
+          className="w-full mb-5 p-2 rounded"
+          ref={foneRef}
           />
 
           <input type="submit" value = "cadastro" className="cursor-pointer w-full p-2 bg-black text-white font-medium rounded"/>
@@ -86,6 +96,7 @@ async function hendleDelet(id:string) {
         className="w-full bg-white rounded p-2 relative hover:scale-105 duration-200">
             <p><span className="font-medium">Nome:</span> {customer.name}</p>
             <p><span className="font-medium">E-mail:</span> {customer.email}</p>
+            <p><span className="font-medium">Telefone:</span> {customer.fone}</p>
             <p><span className="font-medium">Status:</span> {customer.status ? "ativo": "INATIVO"}</p>
 
             <button className='bg-red-500 w-7 h-7 flex items-center justify-center rounded-lg absolute right-0 -top-2' onClick={() => hendleDelet(customer.id)}>
