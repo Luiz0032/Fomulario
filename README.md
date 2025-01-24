@@ -26,7 +26,7 @@ Esta solução foi desenvolvida para captar informações de leads e clientes, u
 
 ### Screenshot
 
-![](imagens/video_demonstracao.mp4)
+![](imagens/video_demonstracao.gif)
 
 
 ## Meu processo🚀
