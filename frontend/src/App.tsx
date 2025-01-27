@@ -63,8 +63,8 @@ async function hendleDelet(id:string) {
 }
 
   return (
-    <div className="w-full min-h-screen bg-gray-900 flex justify-center px-4">
-      <main className="my-10 w-full md:max-w-2xl">
+    <div className="w-full min-h-screen h-14 bg-gradient-to-t from-indigo-100 via-indigo-600 to-white flex justify-center px-4">
+      <main className="my-10 w-1/3 md:max-w-2xl border-2 bg-neutral-800 border-sky-600 p-5 rounded-lg shadow-xl shadow-sky-600">
         <h1 className="text-5xl font-medium text-white text-center">Formulario</h1>
 
         <form className="flex flex-col my-6" onSubmit={hendleSubmit}>
@@ -86,24 +86,26 @@ async function hendleDelet(id:string) {
           ref={foneRef}
           />
 
-          <input type="submit" value = "cadastro" className="cursor-pointer w-full p-2 bg-black text-white font-medium rounded"/>
+          <input type="submit" value = "cadastro" className="cursor-pointer w-full p-2 bg-sky-600 text-white border-2 border-black font-bold rounded-xl hover:scale-105 duration-200"/>
         </form>
 
-        <section className="flex flex-col gap-4">
-      {customers.map( (customer) => (
-        <article
-        key={customer.id}
-        className="w-full bg-white rounded p-2 relative hover:scale-105 duration-200">
-            <p><span className="font-medium">Nome:</span> {customer.name}</p>
-            <p><span className="font-medium">E-mail:</span> {customer.email}</p>
-            <p><span className="font-medium">Telefone:</span> {customer.fone}</p>
-            <p><span className="font-medium">Status:</span> {customer.status ? "ativo": "INATIVO"}</p>
+        <div className='max-h-96 overflow-y-auto absolute w-1/4 flex-auto flex-col items-center p-5 mx-12 scrollbar-thin scrollbar-thumb-sky-600 scrollbar-track-sky-300'>
+          <section className="flex flex-col gap-4">
+        {customers.map( (customer) => (
+          <article
+          key={customer.id}
+          className="w-full bg-white rounded p-2 relative hover:scale-105 duration-200">
+              <p><span className="font-medium">Nome:</span> {customer.name}</p>
+              <p><span className="font-medium">E-mail:</span> {customer.email}</p>
+              <p><span className="font-medium">Telefone:</span> {customer.fone}</p>
+              <p><span className="font-medium">Status:</span> {customer.status ? "ativo": "INATIVO"}</p>
 
             <button className='bg-red-500 w-7 h-7 flex items-center justify-center rounded-lg absolute right-0 -top-2' onClick={() => hendleDelet(customer.id)}>
               <FiTrash size={18} color='#fff'/>
             </button>
           </article>))}
         </section>
+        </div>
       </main>
     </div>
   )
